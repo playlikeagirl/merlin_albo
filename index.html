@@ -539,7 +539,7 @@
   <div class="wrap">
     <div class="sec-head">
       <h2>Partidos de la fecha</h2>
-      <span class="kick mono eyebrow">Próxima fecha · 13 y 14 de septiembre</span>
+      <span class="kick mono eyebrow">Próxima fecha</span>
     </div>
     <p class="note" style="margin:-8px 0 22px">Tabla al 7 sep. Últimos resultados vs. lo que dijo el modelo: <b style="color:#c8cabf">Everton 0-1 U. Católica</b> (daba 38% Católica ✓) · <b style="color:#c8cabf">Huachipato 0-0 Colo</b> (daba "Colo no gana" 54% ✓) · <b style="color:#c8cabf">U. de Chile 4-2 Coquimbo</b> (daba 49% U ✓). <b style="color:#c8cabf">3 de 3</b> en la dirección.</p>
     <p class="note" style="margin:-14px 0 22px;color:var(--amber)">Recordatorio honesto: un puñado de partidos no valida un modelo — lo que cuenta es la calibración en el largo plazo. La Serena–U. de Chile: xG local de Palestino estimado (no venía en los datos).</p>
@@ -828,10 +828,13 @@ const days = [
 
 function matchCard(g){
   const [ph,pd,pa]=g.p;
+  const FOCUS=["Colo-Colo","U. de Chile","U. Católica"];
+  let ft,fw;
+  if(FOCUS.includes(g.a)&&!FOCUS.includes(g.h)){ ft=g.a; fw=pa; } else { ft=g.h; fw=ph; }
   return `<div class="card${g.cl?' clasico':''}">
     <div class="ctop">
       <span>Liga de Primera</span>
-      <span>${g.cl?'<span class="tag">Superclásico</span> ':''}${g.ko} hrs</span>
+      <span>${g.cl?'<span class="tag">Superclásico</span>':''}</span>
     </div>
     <div class="teams">
       <div class="team home">${badge(g.h)}<span class="nm">${g.h}</span></div>
@@ -845,8 +848,8 @@ function matchCard(g){
       <div class="p away"><div class="lab">Gana visita</div><div class="val">${pa}%</div></div>
     </div>
     <div class="gng">
-      <div class="gng-top"><span>${g.h} <span class="${ph>=100-ph?'g-on':'g-off'}">gana ${ph}%</span></span><span><span class="${100-ph>ph?'n-on':'n-off'}">no gana ${100-ph}%</span></span></div>
-      <div class="gng-bar"><i style="width:${ph}%"></i></div>
+      <div class="gng-top"><span>${ft} <span class="${fw>=100-fw?'g-on':'g-off'}">gana ${fw}%</span></span><span><span class="${100-fw>fw?'n-on':'n-off'}">no gana ${100-fw}%</span></span></div>
+      <div class="gng-bar"><i style="width:${fw}%"></i></div>
     </div>
     <div class="cfoot">
       <span>xG <b>${g.xg[0].toFixed(2)}–${g.xg[1].toFixed(2)}</b></span>
@@ -855,12 +858,8 @@ function matchCard(g){
     </div>
   </div>`;
 }
-document.getElementById('matches').innerHTML = days.map(day=>`
-  <div class="daygroup">
-    <div class="day-label"><span class="bar"></span><h3>${day.d}</h3>
-      <span class="cnt">${day.games.length} partido${day.games.length>1?'s':''}</span></div>
-    <div class="cards">${day.games.map(matchCard).join('')}</div>
-  </div>`).join('');
+document.getElementById('matches').innerHTML =
+  `<div class="cards">${days.flatMap(d=>d.games).map(matchCard).join('')}</div>`;
 
 // ---- season simulation output ----
 const season = [
