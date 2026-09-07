@@ -491,6 +491,11 @@
   #install-banner .close{background:none;border:0;color:var(--muted);cursor:pointer;font-size:18px;
     padding:0 4px;line-height:1}
   @media(max-width:600px){#install-banner{flex-wrap:wrap;text-align:center}}
+
+  .sim-venue{font-family:"Space Mono",monospace;font-size:9px;text-transform:uppercase;letter-spacing:.04em;
+    padding:2px 6px;border-radius:4px;white-space:nowrap}
+  .sim-venue.loc{color:var(--home-ink);border:1px solid #3d5a2e}
+  .sim-venue.vis{color:var(--muted);border:1px solid var(--border-2)}
 </style>
 </head>
 <body>
@@ -677,7 +682,7 @@
   <div class="wrap">
     <div class="sec-head"><h2>Simulá lo que queda de temporada</h2>
       <span class="kick mono eyebrow">las 8 fechas · resumen tras cada una</span></div>
-    <p class="sim-hint">Calendario oficial completo (fechas 23 a 30). Cambiá los resultados y mirá cómo evoluciona la carrera: puntos de los tres, cuánto le basta a Colo y el margen de cada perseguidor. <b>Ojo:</b> en la fecha 26 juegan Católica vs U. de Chile y en la 28 Colo-Colo vs Católica — un solo partido define a ambos. "vs" = local · "@" = visita.</p>
+    <p class="sim-hint">Calendario oficial completo (fechas 23 a 30). Cambiá los resultados y mirá cómo evoluciona la carrera: puntos de los tres, cuánto le basta a Colo y el margen de cada perseguidor. <b>Ojo:</b> en la fecha 26 juegan Católica vs U. de Chile y en la 28 Colo-Colo vs Católica — un solo partido define a ambos. Cada partido marca si Colo, la U o Católica juega de <b>local</b> o de <b>visita</b>.</p>
     <div class="sim-timeline" id="sim-timeline"></div>
     <p class="sim-hint" style="margin-top:16px">El <b>margen</b> es hasta cuándo cada perseguidor puede al menos <b>igualar en puntos</b> a Colo — que en Chile se define con <b>partido de definición</b>, no por diferencia de gol. Se calcula en el peor caso para Colo (que pierda todo lo que le queda).</p>
   </div>
@@ -972,8 +977,8 @@ document.querySelectorAll('section[id]').forEach(s=>io.observe(s));
     H+=`<div class="sim-fblock"><div class="sim-fecha">${flbl[i]}</div>`;
     F[i].forEach((m,j)=>{
       let tm,opp,btns,extra="";
-      if(m.t==="solo"){ tm=NAME[m.team]; opp=m.opp?((m.loc?"vs ":"@ ")+m.opp):""; btns=[[2,"G"],[1,"E"],[0,"P"]]; }
-      else { tm="Duelo directo"; opp=m.label; btns=[[2,"Gana "+SH[m.home]],[1,"Empate"],[0,"Gana "+SH[m.away]]]; extra=" sim-h2h"; }
+      if(m.t==="solo"){ tm=NAME[m.team]; opp=m.opp?(`vs ${m.opp} <span class="sim-venue ${m.loc?"loc":"vis"}">${m.loc?"local":"visita"}</span>`):""; btns=[[2,"G"],[1,"E"],[0,"P"]]; }
+      else { tm="Duelo directo"; opp=`${NAME[m.home]} <span class="sim-venue loc">local</span> vs ${NAME[m.away]}`; btns=[[2,"Gana "+SH[m.home]],[1,"Empate"],[0,"Gana "+SH[m.away]]]; extra=" sim-h2h"; }
       H+=`<div class="sim-mini${extra}"><span class="sim-mini-tm">${tm}</span><span class="sim-mini-opp">${opp}</span>`+
          `<div class="sim-btns-mini" data-fecha="${i}" data-match="${j}">`+
          btns.map(([r,l])=>`<button class="sim-bm${m.r===r?" active":""}" data-r="${r}">${l}</button>`).join("")+
