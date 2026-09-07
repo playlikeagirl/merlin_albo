@@ -677,8 +677,9 @@
   <div class="wrap">
     <div class="sec-head"><h2>Simulá lo que queda de temporada</h2>
       <span class="kick mono eyebrow">las 8 fechas · resumen tras cada una</span></div>
-    <p class="sim-hint">Cambiá los resultados y mirá cómo evoluciona la carrera fecha a fecha: puntos de los tres, cuánto le basta a Colo y cuánto margen le queda a cada perseguidor. <b>Ojo:</b> en la fecha 26 juegan Católica vs U. de Chile y en la 28 Católica vs Colo-Colo — son un solo partido (un resultado define a ambos). Rivales de fechas 25-30 aún sin definir.</p>
+    <p class="sim-hint">Calendario oficial completo (fechas 23 a 30). Cambiá los resultados y mirá cómo evoluciona la carrera: puntos de los tres, cuánto le basta a Colo y el margen de cada perseguidor. <b>Ojo:</b> en la fecha 26 juegan Católica vs U. de Chile y en la 28 Colo-Colo vs Católica — un solo partido define a ambos. "vs" = local · "@" = visita.</p>
     <div class="sim-timeline" id="sim-timeline"></div>
+    <p class="sim-hint" style="margin-top:16px">El <b>margen</b> es hasta cuándo cada perseguidor puede al menos <b>igualar en puntos</b> a Colo — que en Chile se define con <b>partido de definición</b>, no por diferencia de gol. Se calcula en el peor caso para Colo (que pierda todo lo que le queda).</p>
   </div>
 </section>
 
@@ -776,7 +777,7 @@
     <div>
       <h5>Límites</h5>
       <p>Estima probabilidades, no certezas — y no le gana al mercado. No ve alineaciones ni
-        lesiones. Tabla reconciliada con datos oficiales (FootyStats) al 5 de septiembre. Fecha en juego: 6 y 7 de septiembre. No es consejo de apuestas.</p>
+        lesiones. Tabla oficial completa (FootyStats) tras la fecha 22, con el calendario de las 8 fechas restantes cargado. No es consejo de apuestas.</p>
       <p class="note">Cobresal y U. de Concepción con incertidumbre extra en su punto de partida.</p>
     </div>
   </div>
@@ -811,10 +812,10 @@ const badge = n => `<span class="badge" style="background:${T[n].bg};color:${T[n
 
 // ---- next round (from the model) ----
 const days = [
-  {d:"Sábado 13 de septiembre", games:[
+  {d:"Domingo 13 de septiembre", games:[
     {h:"Palestino", a:"U. Católica", p:[43,25,32], xg:[1.56,1.31], o25:55, btts:58, ko:"18:00"}
   ]},
-  {d:"Domingo 14 de septiembre", games:[
+  {d:"Lunes 14 de septiembre", games:[
     {h:"Colo-Colo", a:"Concepción", p:[54,24,22], xg:[1.78,1.05], o25:54, btts:54, ko:"18:00"},
     {h:"La Serena", a:"U. de Chile", p:[36,25,39], xg:[1.35,1.42], o25:53, btts:56, ko:"20:30"}
   ]}
@@ -859,23 +860,23 @@ document.getElementById('matches').innerHTML = days.map(day=>`
 // ---- season simulation output ----
 const season = [
   // name, ptsNow, xMean, p10, p90, champ, releg
-  // RECONCILIADO con tabla oficial FootyStats (7 sep). Incluye U. de Chile 4-2 Coquimbo. Sim 20 calendarios.
-  ["Colo-Colo",53,67.9,63,72,99.77,0.0],
-  ["U. Católica",39,50.6,46,55,0.06,0.0],
-  ["U. de Chile",39,52.7,48,57,0.17,0.0],
-  ["Palestino",33,46.2,41,51,0.0,0.0],
-  ["Ñublense",32,43.5,39,48,0.0,0.02],
-  ["Everton",30,41.5,37,46,0.0,0.15],
-  ["Limache",30,39.7,35,45,0.0,0.52],
-  ["Concepción",30,40.1,35,45,0.0,0.44],
-  ["La Serena",30,39.5,35,44,0.0,0.64],
-  ["Coquimbo",29,42.8,38,48,0.0,0.10],
-  ["O'Higgins",27,39.7,35,44,0.0,0.99],
-  ["Audax",25,35.1,30,40,0.0,10.87],
-  ["Huachipato",25,34.6,30,39,0.0,17.07],
-  ["U. de Concepción",22,33.4,29,38,0.0,28.87],
-  ["U. La Calera",20,29.5,25,34,0.0,67.24],
-  ["Cobresal",18,28.7,24,34,0.0,73.08]
+  // Tabla oficial completa (FootyStats, fixture PDF, tras fecha 22). Sim 20 calendarios.
+  ["Colo-Colo",53,67.9,63,72,99.76,0.0],
+  ["U. Católica",39,50.6,46,55,0.05,0.0],
+  ["U. de Chile",39,53.0,48,58,0.19,0.0],
+  ["Palestino",36,47.9,43,53,0.0,0.0],
+  ["Ñublense",32,42.9,38,48,0.0,0.03],
+  ["Everton",30,41.5,37,46,0.0,0.12],
+  ["Limache",30,39.9,35,45,0.0,0.43],
+  ["Concepción",30,40.1,36,45,0.0,0.33],
+  ["La Serena",30,39.5,35,44,0.0,0.52],
+  ["Coquimbo",29,43.0,38,48,0.0,0.07],
+  ["O'Higgins",27,39.7,35,44,0.0,0.86],
+  ["Audax",25,34.9,30,40,0.0,9.96],
+  ["Huachipato",25,34.8,30,40,0.0,14.44],
+  ["U. de Concepción",22,32.3,28,37,0.0,35.65],
+  ["U. La Calera",20,29.2,25,34,0.0,66.64],
+  ["Cobresal",18,28.6,24,34,0.0,70.96]
 ];
 
 function rankList(el, key, fillClass, cls, label){
@@ -955,24 +956,23 @@ document.querySelectorAll('section[id]').forEach(s=>io.observe(s));
 (function(){
   const NAME={colo:"Colo-Colo",uch:"U. de Chile",cat:"U. Católica"};
   const SH={colo:"Colo",uch:"la U",cat:"Católica"};
-  const flbl=["Fecha 23 · 13–14 sep","Fecha 24 · ~oct","Fecha 25","Fecha 26","Fecha 27","Fecha 28","Fecha 29","Fecha 30"];
-  // fixtures per fecha. solo: {t,team,opp,r}; h2h: {t,home,away,label,r}
+  const flbl=["Fecha 23 · 13–14 sep","Fecha 24 · 10–12 oct","Fecha 25 · 25 oct","Fecha 26 · 1 nov","Fecha 27 · 8 nov","Fecha 28 · 22 nov","Fecha 29 · 29 nov","Fecha 30 · 6 dic"];
   const F=[
-    [{t:"solo",team:"colo",opp:"Concepción",r:2},{t:"solo",team:"uch",opp:"La Serena",r:2},{t:"solo",team:"cat",opp:"Palestino",r:2}],
-    [{t:"solo",team:"colo",opp:"Coquimbo",r:2},{t:"solo",team:"uch",opp:"Ñublense",r:2},{t:"solo",team:"cat",opp:"Audax",r:2}],
-    [{t:"solo",team:"colo",opp:"",r:2},{t:"solo",team:"uch",opp:"",r:2},{t:"solo",team:"cat",opp:"",r:2}],
-    [{t:"solo",team:"colo",opp:"",r:2},{t:"h2h",home:"cat",away:"uch",label:"U. Católica vs U. de Chile",r:1}],
-    [{t:"solo",team:"colo",opp:"",r:2},{t:"solo",team:"uch",opp:"",r:2},{t:"solo",team:"cat",opp:"",r:2}],
-    [{t:"solo",team:"uch",opp:"",r:2},{t:"h2h",home:"cat",away:"colo",label:"U. Católica vs Colo-Colo",r:0}],
-    [{t:"solo",team:"colo",opp:"",r:2},{t:"solo",team:"uch",opp:"",r:2},{t:"solo",team:"cat",opp:"",r:2}],
-    [{t:"solo",team:"colo",opp:"",r:2},{t:"solo",team:"uch",opp:"",r:2},{t:"solo",team:"cat",opp:"",r:2}]
+    [{t:"solo",team:"colo",opp:"Concepción",loc:true,r:2},{t:"solo",team:"uch",opp:"La Serena",loc:false,r:2},{t:"solo",team:"cat",opp:"Palestino",loc:false,r:2}],
+    [{t:"solo",team:"colo",opp:"Coquimbo",loc:false,r:2},{t:"solo",team:"uch",opp:"Ñublense",loc:true,r:2},{t:"solo",team:"cat",opp:"Audax",loc:true,r:2}],
+    [{t:"solo",team:"colo",opp:"Palestino",loc:false,r:2},{t:"solo",team:"uch",opp:"Everton",loc:true,r:2},{t:"solo",team:"cat",opp:"U. La Calera",loc:false,r:2}],
+    [{t:"solo",team:"colo",opp:"U. de Concepción",loc:true,r:2},{t:"h2h",home:"cat",away:"uch",label:"U. Católica vs U. de Chile",r:1}],
+    [{t:"solo",team:"colo",opp:"Ñublense",loc:false,r:2},{t:"solo",team:"uch",opp:"Cobresal",loc:true,r:2},{t:"solo",team:"cat",opp:"Limache",loc:true,r:2}],
+    [{t:"solo",team:"uch",opp:"O'Higgins",loc:false,r:2},{t:"h2h",home:"colo",away:"cat",label:"Colo-Colo vs U. Católica",r:2}],
+    [{t:"solo",team:"colo",opp:"La Serena",loc:true,r:2},{t:"solo",team:"uch",opp:"Concepción",loc:false,r:2},{t:"solo",team:"cat",opp:"Huachipato",loc:true,r:2}],
+    [{t:"solo",team:"colo",opp:"Cobresal",loc:false,r:2},{t:"solo",team:"uch",opp:"U. La Calera",loc:true,r:2},{t:"solo",team:"cat",opp:"U. de Concepción",loc:true,r:2}]
   ];
   let H="";
   for(let i=0;i<8;i++){
     H+=`<div class="sim-fblock"><div class="sim-fecha">${flbl[i]}</div>`;
     F[i].forEach((m,j)=>{
       let tm,opp,btns,extra="";
-      if(m.t==="solo"){ tm=NAME[m.team]; opp=m.opp?("vs "+m.opp):""; btns=[[2,"G"],[1,"E"],[0,"P"]]; }
+      if(m.t==="solo"){ tm=NAME[m.team]; opp=m.opp?((m.loc?"vs ":"@ ")+m.opp):""; btns=[[2,"G"],[1,"E"],[0,"P"]]; }
       else { tm="Duelo directo"; opp=m.label; btns=[[2,"Gana "+SH[m.home]],[1,"Empate"],[0,"Gana "+SH[m.away]]]; extra=" sim-h2h"; }
       H+=`<div class="sim-mini${extra}"><span class="sim-mini-tm">${tm}</span><span class="sim-mini-opp">${opp}</span>`+
          `<div class="sim-btns-mini" data-fecha="${i}" data-match="${j}">`+
@@ -982,14 +982,16 @@ document.querySelectorAll('section[id]').forEach(s=>io.observe(s));
     H+=`<div class="sim-summary" id="sum-${i}"></div></div>`;
   }
   document.getElementById("sim-timeline").innerHTML=H;
-
-  function marginTxt(gap,G){
-    if(G===0) return gap>0?`quedó a <b>${gap}</b>`:(gap===0?"empató en puntos":`<span class="elim">lo superó</span>`);
-    const dm=3*G-gap-1;
-    if(dm<0) return `<span class="elim">eliminado</span>`;
+  function chaserTxt(gap,G){
+    if(gap > 3*G) return `<span class="elim">eliminado</span>`;   // no puede ni empatar
+    const dm=3*G-gap;                                            // margen para al menos igualar (→ definición)
     if(dm===0) return `no puede ceder ni un punto`;
     const mL=Math.floor(dm/3), mD=Math.floor(dm/2);
     return `máx <b>${mL}</b> ${mL===1?"derrota":"derrotas"} o <b>${mD}</b> ${mD===1?"empate":"empates"}`;
+  }
+  function finalTxt(pts,top,nTop,isColo){
+    if(pts===top) return nTop>1 ? `<span class="champ">a definición</span>` : `<span class="champ">${isColo?"¡CAMPEÓN!":"¡campeón!"}</span>`;
+    return isColo ? `<span class="elim">lo pasaron</span> (a ${top-pts})` : `quedó a <b>${top-pts}</b>`;
   }
   function render(){
     let cP=53,uP=39,kP=39;
@@ -1001,16 +1003,22 @@ document.querySelectorAll('section[id]').forEach(s=>io.observe(s));
           add(m.home,hp); add(m.away,ap); }
       }
       const G=8-(i+1), best=Math.max(uP,kP), gU=cP-uP, gK=cP-kP, minGap=Math.min(gU,gK);
-      const magic=best+3*G+1-cP;
-      let cTxt;
-      if(G===0) cTxt=cP>best?`<span class="champ">¡CAMPEÓN!</span>`:(cP===best?`<span class="champ">campeón por dif. de gol</span>`:`<span class="elim">¡lo pasaron!</span>`);
-      else if(magic<=0) cTxt=`<span class="champ">¡CAMPEÓN MATEMÁTICO!</span>`;
-      else cTxt=`le bastan <b>${magic}</b> de ${3*G}`;
+      let cTxt,uTxt,kTxt;
+      if(G===0){
+        const top=Math.max(cP,uP,kP), nTop=[cP,uP,kP].filter(x=>x===top).length;
+        cTxt=finalTxt(cP,top,nTop,true); uTxt=finalTxt(uP,top,nTop,false); kTxt=finalTxt(kP,top,nTop,false);
+      } else {
+        const magic=best+3*G+1-cP;   // puntos propios para el título directo (sin definición)
+        cTxt = magic<=0 ? `<span class="champ">¡CAMPEÓN MATEMÁTICO!</span>`
+             : (magic<=3*G ? `le bastan <b>${magic}</b> de ${3*G}` : `aún no puede sellarlo solo`);
+        uTxt=chaserTxt(gU,G); kTxt=chaserTxt(gK,G);
+      }
+      const gapStr = (minGap>=0?"+":"")+minGap;
       document.getElementById("sum-"+i).innerHTML=
         `<span class="lead">Tras la fecha ${23+i}</span> · quedan <b>${G}</b> ${G===1?"fecha":"fechas"}`+
-        `<div class="sim-srow"><span class="sim-stm">Colo-Colo</span><span class="pts">${cP}</span><span class="m">(+${minGap}) · ${cTxt}</span></div>`+
-        `<div class="sim-srow"><span class="sim-stm">U. de Chile</span><span class="pts">${uP}</span><span class="m">${marginTxt(gU,G)}</span></div>`+
-        `<div class="sim-srow"><span class="sim-stm">U. Católica</span><span class="pts">${kP}</span><span class="m">${marginTxt(gK,G)}</span></div>`;
+        `<div class="sim-srow"><span class="sim-stm">Colo-Colo</span><span class="pts">${cP}</span><span class="m">(${gapStr}) · ${cTxt}</span></div>`+
+        `<div class="sim-srow"><span class="sim-stm">U. de Chile</span><span class="pts">${uP}</span><span class="m">${uTxt}</span></div>`+
+        `<div class="sim-srow"><span class="sim-stm">U. Católica</span><span class="pts">${kP}</span><span class="m">${kTxt}</span></div>`;
     }
   }
   document.querySelectorAll("#sim-timeline .sim-btns-mini").forEach(g=>{
