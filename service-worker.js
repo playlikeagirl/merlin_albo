@@ -1,12 +1,14 @@
-const CACHE_NAME = 'maquina-adivina-v1';
+const CACHE_NAME = 'merlin-el-blanco-v2';
 const APP_SHELL = [
   './',
   './index.html',
   './manifest.json',
-  './icons/icon-192.png',
-  './icons/icon-512.png',
-  './icons/icon-maskable-192.png',
-  './icons/icon-maskable-512.png'
+  './icons/favicon-32.png',
+  './icons/apple-touch-icon.png',
+  './icons/app-icon-192.png',
+  './icons/app-icon-512.png',
+  './icons/app-icon-maskable-192.png',
+  './icons/app-icon-maskable-512.png'
 ];
 
 self.addEventListener('install', (event) => {
